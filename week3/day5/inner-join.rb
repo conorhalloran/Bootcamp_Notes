@@ -24,3 +24,9 @@ ON projects.student_id = students.id
 GROUP BY students.id
 ORDER BY total DESC;
 
+List all the students enrolled in the course "up-sized hybrid project"
+SELECT students.* FROM students
+INNER JOIN enrolments ON enrolments.student_id = students.id
+INNER JOIN courses ON enrolments.course_id = courses.id
+WHERE courses.title = 'Up-sized hybrid project';
+
