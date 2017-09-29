@@ -103,6 +103,7 @@ typings/
 # dotenv environment variables file
 .env
 
+/week1/day1/git-demo/
 
 ### Rails ###
 *.rbc
