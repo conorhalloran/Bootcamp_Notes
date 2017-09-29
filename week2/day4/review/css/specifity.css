@@ -1,0 +1,18 @@
+/*Algorithm used to determine which CSS rules are more important*/
+
+/*Most Specifity Value
+      👇
+  Style Attribute - inline styling
+  ID
+  Class, Pseudo-Class, Attribute
+  Elements
+      👇
+Least Specifity Value*/
+
+/*css-tricks.com/specifics*/
+
+/*Selects all anchors that have an active class inside a list with a nav id in an unordered list. */
+ul#nav li.active a {}
+
+/*!important wins all specificity wars, but at a great cost. Avoid as much as possible. */
+  

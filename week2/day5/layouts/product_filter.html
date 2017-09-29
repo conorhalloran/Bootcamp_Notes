@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style type="text/css">
+    main {
+      display:flex;
+      flex-wrap: wrap;
+    }
+    main > div:not(:last-child){
+      margin-right: 20px;
+    }
+    main > div{
+      min-height: 1000px;
+      background-color: grey;
+      flex-grow:1;
+      border-radius: 15px;
+
+    }
+    .one{
+      max-height: 100%;
+      max-width: 150px;
+    }
+    .two{
+      display:flex;
+      flex-grow: 1.5;
+      background-color: transparent;
+      flex-direction: column;
+      min-width: 200px;
+      max-width:300px;
+    }
+    .three{
+      display:flex;
+      flex-grow: 1.5;
+      background-color: transparent;
+      flex-direction: column;
+      min-width: 200px;
+      max-width: 300px;
+    }
+    .two > div {
+      flex-grow: 1.5;
+      background-color: lightgrey;
+      border-radius: 20px;
+    }
+    .two>div:last-child{
+      margin-top: 20px;
+    }
+    .three > div {
+      flex-grow: 1.5;
+      background-color: lightgrey;
+      border-radius: 20px;
+    }
+    .three>div:last-child{
+      margin-top: 20px;
+    }
+
+  </style>
+</head>
+<body>
+  <main>
+
+    <div class="one">
+    </div>
+    <div class="two">
+      <div></div>
+      <div></div>
+    </div>
+    <div class="three">
+      <div></div>
+      <div></div>
+    </div>
+
+  </main>
+</body>
+</html>

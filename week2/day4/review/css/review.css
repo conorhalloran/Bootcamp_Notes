@@ -1,0 +1,67 @@
+
+/* * {} Selects all Elements */
+/* p {} All Elements with 'p' tags */
+/* div {} All Elements with 'div' tags */
+/* #board_1 {} Elements with id of 'board_1' */
+/* #jon-snow {} Elements with id of 'jon-snow' */
+/* .rating {} Element with a class of 'rating' */
+/* col-md-3 {} Element with the class of col-md-3 */
+/* h1, h2, h3, .heading {} All h1,h2,h3 and heading class */
+/* div#j890.container {} will join the div with a class of j890 with the container VERY SPECIFIC */
+/* ul > li {} will apply to all li items with a parent of ul */
+/* All buttons that are decedents of nav */
+nav button {}
+/*all links that have been visited*/
+a:visited {}
+/* How to select a div with a curser on top */
+div:hover {}
+/* how do you select an element with the attribute data-content */
+[data-content] {}
+/* How do you select all child elements of ul, but the last one */
+/*:not() is a pseudo-selector that takes argument which is another
+   selector. It will ignore the selectors given has arguments.*/
+ul > *:not(:last-child) {} /* ul > (child elements) * (all) :not:(last-child) (except last one) */
+
+/*Units*/
+boarder-radius: 3px;
+
+font-size: 1em; /* 1 'em' is the font size of the parent element's font size */
+font-size: 1rem; /* 1 'rem' is the font size of the root element's font size */
+width: 20%; /* percentage width of parent element */
+margin: 5vw; /* (viewport width) percentage width of browser window. There is also vh (viewport height).*/
+margin: 5hw;
+width: calc(100% - 12px)
+width: calc(100%/3 - 12px)
+
+display: block;
+/*default for div, p and many elements*/
+/*A block element always starts on a new line and takes up the full width available (streches out to the left and right as far as it can.)*/
+
+display: inline;
+/*does not start on a new line and only takes up as much space as necessary.*/
+
+display: inline-block;
+/*does not start on a new line and only takes up as much width as necessary
+allows all margins
+allows all width and height properties. */
+
+display: none
+/*an element with display none no longer occupies space and is no longer visable. */
+
+display: grid
+display: inline-grid
+/*learn more about these two above*/
+
+float: left;
+float: right;
+float: none;
+/*Floated elements are taken out of the normal flow of the document (though still remaining part of it). It is shifted to the left, right, or none */
+
+/*Clearfix Hack*/
+overflow: auto;
+
+.containers {
+  overflow: auto;
+  float: right;
+}
+/*containers with floaded elements do not stretch accommodate floating elements. There are several workarounds. One is to tell the container to overflow auto.*/

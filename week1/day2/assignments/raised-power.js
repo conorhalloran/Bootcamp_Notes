@@ -1,0 +1,1 @@
+// Write a program that prompts a user for two numbers, then calculate the first number raised to the power of second number and log it to the console. For example, a user enters 4 and 6 as their first and second numbers respectively. We raise 4 to the 6th power. You are not allowed to use the ** operator or the Math.pow function.

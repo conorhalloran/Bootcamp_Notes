@@ -1,0 +1,39 @@
+body {
+  100%;
+  background-color: black;
+  margin: 0;
+}
+
+#container {
+  width: 100vw;
+  height: 100vh;
+}
+div {
+  border-bottom: 5px solid white;
+  border-right: 5px solid white;
+  border-radius: 0 0 100% 0;
+}
+
+.blue-box {
+  background-color: blue;
+}
+.green-box {
+  background-color: green;
+  width: 50%;
+  height: 50%;
+}
+.yellow-box {
+  background-color: yellow;
+  width: 50%;
+  height: 50%;
+}
+.orange-box {
+  background-color: orange;
+  width: 50%;
+  height: 50%;
+}
+.red-box {
+  background-color: red;
+  width: 50%;
+  height: 50%;
+}

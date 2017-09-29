@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Flex Properties</title>
+    <link rel="stylesheet" href="css/index.css" type="text/css" media="screen" charset="utf-8">
+    <style>
+      .flex-me {
+        display: flex;
+        background-color: azure;
+        border: thin solid teal;
+        border-radius: 5px;
+        min-height: 150px;
+      }
+
+      .flex-me > div {
+        width: 75px;
+        min-height: 75px;
+        background-color: teal;
+        border-radius: 5px;
+      }
+
+      .flex-me > div:nth-child(2n) {
+        background-color: firebrick;
+        min-height: 100px;
+      }
+
+      .flex-me.flex-wrap-demo {
+        width: 50%;
+        min-height: 300px;
+      }
+
+      .flex-me.align-content-demo {
+        width: 50%;
+        min-height: 300px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Flex Properties</h1>
+    <p>With flex, you'll discover that far less CSS is required to achieve
+      certain layouts</p>
+
+    <p>The <strong>flex container</strong> behaves like a block element for the
+      most part. It'll take up the entire width available by default. It's its
+      children, <strong>flex items</strong>, that have special behaviour.
+      Think of the <strong>flex container</strong> as the choreographer and
+      <strong>flex items</strong>, its dancers.
+    </p>
+
+    <h2>Flex Container</h2>
+    <h3>Default</h3>
+
+    <!-- ð this div will serve as my flex container -->
+    <div
+      style='display: flex;'
+    >
+      <div
+        style='background-color: salmon; height: 50px; width: 50px; margin: 2px;'
+      ></div>
+      <div
+        style='background-color: salmon; height: 50px; width: 50px; margin: 2px;'
+      ></div>
+      <div
+        style='background-color: salmon; height: 50px; width: 50px; margin: 2px;'
+      ></div>
+    </div>
+
+    <h3>align-items property</h3>
+
+    <pre><strong>align-items:</strong>stretch;</pre>
+    <div
+      class='flex-me'
+      style='align-items: stretch;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>align-items:</strong>flex-start;</pre>
+    <div
+      class='flex-me'
+      style='align-items: flex-start;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>align-items:</strong>flex-end;</pre>
+    <div
+      class='flex-me'
+      style='align-items: flex-end;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>align-items:</strong>center;</pre>
+    <div
+      class='flex-me'
+      style='align-items: center;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <h3>justify-content property</h3>
+
+    <pre><strong>justify-content:</strong>flex-start;</pre>
+    <div
+      class='flex-me'
+      style='justify-content: flex-start;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>justify-content:</strong>flex-end;</pre>
+    <div
+      class='flex-me'
+      style='justify-content: flex-end;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>justify-content:</strong>center;</pre>
+    <div
+      class='flex-me'
+      style='justify-content: center;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>justify-content:</strong>space-between;</pre>
+    <div
+      class='flex-me'
+      style='justify-content: space-between;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>justify-content:</strong>space-around;</pre>
+    <div
+      class='flex-me'
+      style='justify-content: space-around;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <h3>flex-wrap property</h3>
+
+    <pre><strong>flex-wrap:</strong>no-wrap;</pre>
+    <div
+      class='flex-me'
+      style='flex-wrap: no-wrap;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>flex-wrap:</strong>wrap;</pre>
+    <div
+      class='flex-me'
+      style='flex-wrap: wrap;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>flex-wrap:</strong>wrap-reverse;</pre>
+    <div
+      class='flex-me'
+      style='flex-wrap: wrap-reverse;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <h3>align-content property</h3>
+
+    <pre><strong>align-content:</strong>stretch;</pre>
+    <div
+      class='flex-me align-content-demo'
+      style='align-content: stretch; flex-wrap: wrap;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>align-content:</strong>flex-start;</pre>
+    <div
+      class='flex-me align-content-demo'
+      style='align-content: flex-start; flex-wrap: wrap;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>align-content:</strong>flex-end;</pre>
+    <div
+      class='flex-me align-content-demo'
+      style='align-content: flex-end; flex-wrap: wrap;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>align-content:</strong>center;</pre>
+    <div
+      class='flex-me align-content-demo'
+      style='align-content: center; flex-wrap: wrap;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>align-content:</strong>space-between;</pre>
+    <div
+      class='flex-me align-content-demo'
+      style='align-content: space-between; flex-wrap: wrap;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>align-content:</strong>space-around;</pre>
+    <div
+      class='flex-me align-content-demo'
+      style='align-content: space-around; flex-wrap: wrap;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <h3>flex-direction property</h3>
+
+    <pre><strong>flex-direction:</strong>row;</pre>
+    <div
+      class='flex-me'
+      style='flex-direction: row;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>flex-direction:</strong>row-reverse;</pre>
+    <div
+      class='flex-me'
+      style='flex-direction: row-reverse;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>flex-direction:</strong>column;</pre>
+    <div
+      class='flex-me'
+      style='flex-direction: column;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <pre><strong>flex-direction:</strong>column-reverse;</pre>
+    <div
+      class='flex-me'
+      style='flex-direction: column-reverse;'
+      >
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+  </body>
+</html>

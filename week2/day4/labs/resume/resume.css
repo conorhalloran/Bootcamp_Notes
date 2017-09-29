@@ -1,0 +1,42 @@
+/*
+Demonstrate your ability to create a resume using HTML. Use the old style resume below as a template.
+
+Do your best to choose the most appropriate tags for all the different parts of the resume (e.g. section for the different sections of the resume, h1 for its section headings, hr for the lines that are on their own, ul or ol for the various lists, etc).
+
+Providing about half of the content of the example is good enough. Feel free to use generate text for parts of the resume (e.g. Hipster Ipsum).
+*/
+
+.heading1 {
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 5px;
+}
+p {
+  margin-top: 5px;
+}
+
+.heading2 {
+  text-align: center;
+  background-color: lightgrey;
+  text-decoration: underline;
+}
+
+.email {
+  float: right;
+  position: relative;
+  bottom: 15px;
+  clear: right;
+}
+
+.personal-summary {
+  text-align: center;
+}
+
+.horizontal-line-top {
+  margin-top: 20px;
+  height: 3px;
+  padding: 0;
+  background-color: black;
+}

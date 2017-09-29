@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Media Queries</title>
+    <style>
+        body {
+            margin: 0px;
+        }
+
+         /* The `box-sizing` property determines how the browser calculates the
+           size of an element. When it is set to `border-box`, it will including
+           padding & border as part of its weight & height calculations.
+
+           Example:
+           .el { padding: 5px; border-width: 2px; width: 50px; box-sizing: border-box }
+            - The width of the box will be 50px. 
+            - Total Box Width = 50px - 2 * 5px - 2 * 2px = 36px
+          
+            .el { padding: 5px; border-width: 2px; width: 50px; box-sizing: content-box }
+            - When it is set to 'content box' which is the default for most elements (including div):
+            - It will not include padding and border sizes in its height and width calculations.
+            - The width of its content will be 50px.
+            - Total Box Width = 50x + 2 * 5px + 2 * 2px = 64px.
+            
+        */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        nav {
+            height: 30px;
+            background-color: black;
+        }
+
+        /* make element with class .media-flex-demo a flex container */
+        .media-flex-demo {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .media-flex-demo > div {
+            width: calc(25% - 2 * 5px);
+            flex-shrink: 0;
+            background-color: salmon;
+            height: 150px;
+            margin: 5px;
+        }
+        @media screen and (max-width: 992px) {
+            .media-flex-demo > div {
+                width: calc(33% - 2 * 5px);
+                background-color: teal;
+                    }
+        }
+        @media screen and (max-width: 768px) {
+            .media-flex-demo > div {
+                width: calc(50% - 2 * 5px);
+                background-color: violet;
+                }
+        }
+        @media screen and (max-width: 576px) {
+            .media-flex-demo > div {
+                width: calc(100% - 2 * 5px);
+                height: 300px;
+                background-color: yellowgreen;
+            }
+        }
+        @media screen and (min-width: 768px) and (max-width: 992px) {
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+
+    </nav>
+    <main>
+        <section class="media-flex-demo">
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+        </section>
+    </main>
+    
+</body>
+</html>

@@ -1,0 +1,2 @@
+class BritishColumbia
+end

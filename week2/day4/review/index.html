@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hello TRELLO</title>
+  <!-- BOOTSTRAP -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+  <!-- JQUERY -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <!-- JAVASCRIPT -->
+  <script src="js/script.js"></script>
+  <style media="screen"></style>
+  <script type="text/javascript">
+    console.log("I\'m going to be on screen 😈");
+    function add (a, b){
+      return a + b;
+    }
+  </script>
+
+  <!-- To execute javascript, also use a script tag, but give it
+         a `src` attribute with a url (relative or absolute) to the
+         the file. -->
+
+         <!-- script are normally run the moment the browser gets to the tag.
+              This can take long if the file is large which is very common in modern
+              applications.
+
+              With the `async` attribute, we can tell browser to execute a
+              javascript file without blocking the render of the rest of the html or
+              blocking the executing of other javascript.
+
+              With the `defer` attribute, we can tell the browser to execute a file
+              in order and only once the entire document is rendered.
+         -->
+
+  <script src="js/index.js" async defer type="text/javascript">
+
+  </script>
+  <style>
+
+  </style>
+</head>
+<body>
+
+  <!-- ********** NAVIGATION BAR ********** -->
+  <nav>
+    <!-- 'a' tag will look and behave as link once there is an 'href' attribute. If the 'href' attribute doesn't have a value, the 'a' will link to the current page. If there is a url for the value, it will link to that ur. -->
+  <a href="http://nyan.cat/fiesta">Back</a>
+  <a href="#">Boards</a>
+  <!-- Action attribute describes where the data of the form is submitted. In this case, the current domain + /search. -->
+  <!-- Method attribute is an http verb. It describes whether we want to read (get) something or create (post) something. -->
+  <form class="search-field" action="/search" method="get">
+    <!-- default type of an input element is text -->
+    <!-- Placeholder attribute shows a default text in the field until the user types something -->
+    <input name="query" placeholder="Search Boards"/>
+    <!-- For input of type submit, value is used as the button's name -->
+    <input type="submit" name="query" value="Search" />
+  </form>
+  <a href="#">Create</a>
+  <a href="#">Information</a>
+  <a href="#">Notification</a>
+  <a href="#">Profile</a>
+
+
+  </nav>
+
+  <!-- ********** PRIMARY CONTENT ********** -->
+  <!-- we use the 'main' element to hold the primary content the user is here to consume.  -->
+  <main>
+    <h1>Hello-Trello Boards</h1>
+
+    <!-- ********** STARRED BOARDS ********** -->
+    <!-- 'id' attribute works for all elements. It is a unique identifier. No id should be duplicated on the page. NONE!!! -->
+    <section id="starred-boards">
+      <h2>Starred Boards</h2>
+      <ul class="board-list">
+        <!-- Special characters in HTML can be represented by the format '&<char-name>;'
+          (ex: & 👉 &amp; , < 👉 &lt;, > 👉 &gt;) -->
+        <li>&amp; Management </li>
+        <li style="background-image: url(images/planet-581239_1280.jpg);"><div>Learning to Hack</div>
+        </li>
+      </ul>
+
+      <div class="create-board">
+        <form class="" action="index.html" method="post">
+          <input id='create-board' placeholder="Board Name"  type="text" name="" value="">
+          <label for="Create-Board">Password</label>
+          <!-- May types of inputs. 'password' hides letters typed -->
+          <!-- email input may validate email address or autofill. -->
+          <!-- type name='password' used to identify the date. Will be useful later. (acts like a key) -->
+          <select class="" name="alignment">
+            <option value="good" selected>Good</option>
+            <option value="evil">Evil</option>
+
+          </select>
+          <input type="submit" name="" value="Submit" />
+        </form>
+      </div>
+
+    </section>
+
+    <!-- ********** PERSONAL BOARDS ********** -->
+    <section id="personal-boards">
+      <h2>Personal Boards</h2>
+      <ul class="board-list">
+        <!-- Special characters in HTML can be represented by the format '&<char-name>;'
+          (ex: & 👉 &amp; , < 👉 &lt;, > 👉 &gt;) -->
+        <li>Gutenberg Metaplan </li>
+        <li style="background-image: url(images/computer-2583383_1280.jpg)";><div>Learning to Code</div></li>
+        <li style="background-image: url(images/planet-581239_1280.jpg);"><div>Learning to Hack</div></li>
+
+        <li>My Ideas </li>
+        <li>Create New Board... </li>
+      </ul>
+
+      <div class="">
+        <form class="" action="index.html" method="post">
+          <input id='email' placeholder="email"  type="text" name="" value="">
+          <label for="password">Password</label>
+          <!-- May types of inputs. 'password' hides letters typed -->
+          <!-- email input may validate email address or autofill. -->
+          <!-- type name='password' used to identify the date. Will be useful later. (acts like a key) -->
+          <select class="" name="alignment">
+            <option value="good" selected>Good</option>
+            <option value="evil">Evil</option>
+
+          </select>
+          <input type="submit" name="" value="Submit" />
+        </form>
+      </div>
+    </section>
+
+    <div class="">
+
+    </div>
+
+  </main>
+
+
+
+
+
+</body>
+<footer>
+
+</footer>
+
+</html>

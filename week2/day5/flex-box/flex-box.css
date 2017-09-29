@@ -1,0 +1,21 @@
+/*Why Flexbox*/
+*{display: flex;}
+/*Great for mobile layouts*/
+/*Great for little components that are apart of the page*/
+/*Will manage the white space between elements for you*/
+
+/*Important to Realize:*/
+/*The element whose display is set to flex is named flex container.*/
+  /*- only need to put it on the container where you want to manage its layout*/
+  /*- its children are named flex items*/
+    /*-flex items can also be containers*/
+  /*- will only affect its children, not children of children*/
+
+/*CSS properties are split between the container and its items*/
+
+/* Some flex container properties:
+flex-direction, flex-wrap, justify-content, align-items, etc */
+
+/*Flex Items*/
+/*Have properties as well.
+order, flex-grow, flex-shrink, flex-basis, align-self*/

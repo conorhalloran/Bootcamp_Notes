@@ -1,0 +1,209 @@
+/* set a base font better than the default */
+html {
+  font-family: Helvetica, sans-serif;
+  font-weight: 100;
+}
+
+body {
+  margin: 0;
+}
+
+
+/* have all elements inherit box-sizing: borer-box from root tag, html
+ * for info on why this is done
+ * https://css-tricks.com/international-box-sizing-awareness-day/ */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* force header tags to inherit their font-weight instead of using their default 
+ * values. this means, that they'll get the font-weight of the html root tag 
+ * defined above */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: inherit;
+}
+
+body {
+  color: white;
+  background-color: black;
+}
+
+/* STYLES FOR FIXED HEADER */
+
+header {
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  /* to read more about why top & bottom are necessary even though
+   * they may not appear to be, go to:
+   * http://stackoverflow.com/questions/24560958/how-does-margin-of-separate-element-affect-position-of-fixed-element
+   */
+  top: 0;
+  bottom: 0;
+}
+
+header > nav {
+  height: 100%;
+  background-color: black;
+  border-bottom: thin solid white;
+  padding: 0 20px;
+
+  font-size: 1.4em;
+
+  display: flex;
+  align-items: center;
+}
+
+header > nav > a:not(:last-of-type) {
+  margin-right: 20px;
+}
+
+.nav-brand {
+  margin-left: auto;
+}
+
+.nav-logo {
+  height: 1.8em;
+}
+
+.nav-logo > img {
+  /* same height as the header text
+   * width will size to maintain aspect-ratio of the source
+   * image */
+  height: 100%;
+}
+
+/* STYLES FOR MAIN */
+
+main {
+  margin-top: 50px;
+}
+
+.posts {
+  margin: 0 20px;
+}
+
+.posts > article {
+  height: 50vh;
+  margin-bottom: 20px;
+
+  /* without this, the background-image would be positioned awkwardly */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* makes sure that background-image grows or shrinks 
+  * to cover size of element. maintains image aspect ratio in the process */
+
+  /* for more information on background-size,
+   * https://css-tricks.com/almanac/properties/b/background-size/ */
+
+  /* pushes post-info box to bottom of article */
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+}
+
+/* styles for post info icon and text follows */
+.post-info > * {
+  margin: 0;
+  padding: 10px;
+}
+
+.post-type {
+  /* inline-block is used to restrict the width of the element to the width of 
+   * its contents. as always, there may be multiple ways to achieve this */
+  display: inline-block;
+  border-radius: 0 25px 0 0;
+  /* rgba is being used to make the background-color see-through */
+  background-color: rgba(148, 0, 211, 0.50);
+
+  font-size: 1.2em;
+}
+
+.post-title {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.post-title > h1 {
+  margin: 0;
+}
+
+/* STYLES FOR FIXED FOOTER */
+
+/* there are multiple ways to fix the launch-button to the bottom left. however, 
+ * putting it inside a fixed footer maintains a consistent html structure. */
+footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px 20px 20px;
+}
+
+footer .launch-button {
+  height: 60px;
+  width: 60px;
+  background-color: rgba(148, 0, 211, 0.80);
+  color: white;
+
+  font-size: 2em;
+  /* arbitrarly large border-radius to guarantee that the element
+   * appears as a circle */
+  border-radius: 99999px;
+
+  /* quick use of flex to center the rocket icon dead center inside the 
+   * .launch-button div */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: black 2px 2px 9px;
+}
+
+@media screen and (min-width: 768px) {
+  .posts {
+    display: flex;
+    flex-wrap: wrap
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .posts > article:not(:first-child) {
+      width: calc(33% - 20px);
+      margin: 0 20px 0 0;
+      /* background-color: violet; */
+      }
+    }
+@media screen and (min-width: 768px) {
+  .posts > article:first-child {   
+    flex: 0 0 100%;
+          /* background-color: violet; */
+      }
+    }
+.form-control {
+  background-color: purple;
+  border: 0px;
+  padding: 2px;
+  height: 25px;
+  color: white;
+}
+.nav-search {
+  background-color: purple;
+  margin-right: 15px;
+  font-size: 1.25em;
+  
+}
+
+.btn {
+  background-color: purple;
+  border: none;
+  color: white;
+  font-size: 0.75em
+}

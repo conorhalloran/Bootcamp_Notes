@@ -1,0 +1,41 @@
+html {
+    font-family: Helvetica, sans-serif;
+    font-weight: 100;
+    box-sizing: border-box;
+  }
+/* have all elements inherit box-sizing: borer-box from root tag, html for info on why this is done: 
+https://css-tricks.com/international-box-sizing-awareness-day/ */
+body {
+    margin: 0;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.sidebar {
+    background-color: whitesmoke;
+    padding: 0px;
+}
+.nav-pills .nav-link{
+    border-radius: 0;
+}
+.nav-pills .nav-link:hover:not(.active){
+    background-color: #B0C9FF;
+}
+
+.btn-group-vertical {
+    justify-content: flex-start;
+}
+.heading {
+    margin-bottom: 15px;
+}
+#main-content {
+    margin-left: 0px;
+    margin-right: 0px;
+    min-width: 400px;
+    
+}
+.nav-pills {
+    margin-bottom: 10px;
+}

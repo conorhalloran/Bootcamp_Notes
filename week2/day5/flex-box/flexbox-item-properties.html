@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Flex Items</title>
+    <link rel="stylesheet" href="css/index.css" type="text/css" media="screen" charset="utf-8">
+    <style>
+      .flex-me {
+        display: flex;
+        background-color: azure;
+        border: thin solid teal;
+        border-radius: 5px;
+        min-height: 150px;
+      }
+
+      .flex-me > div {
+        width: 150px;
+        min-height: 75px;
+        background-color: teal;
+        border-radius: 5px;
+      }
+
+      .flex-me > div:nth-child(2n) {
+        background-color: firebrick;
+        min-height: 100px;
+      }
+
+      .flex-me.flex-wrap-demo {
+        width: 50%;
+        min-height: 300px;
+      }
+
+      .flex-me.align-content-demo {
+        width: 50%;
+        min-height: 300px;
+      }
+
+      .num {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .num:after {
+        content: '0';
+        color: white;
+        font-size: 3em;
+      }
+
+      .num.one:after { content: '1'; }
+      .num.two:after { content: '2'; }
+      .num.three:after { content: '3'; }
+      .num.four:after { content: '4'; }
+      .num.five:after { content: '5'; }
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Flex Properties</h1>
+
+    <h2>Flex Item</h2>
+    <h3>Default</h3>
+    <div class="flex-me">
+      <div class="num"></div>
+      <div class="num one"></div>
+      <div class="num two"></div>
+      <div class="num three"></div>
+      <div class="num four"></div>
+      <div class="num five"></div>
+    </div>
+
+    <h3>order</h3>
+    <pre><strong>order:</strong> [any integer];</pre>
+    <div class="flex-me">
+      <div class="num"
+        style="order:1;"
+      ></div>
+      <div class="num one"></div>
+      <div class="num two"></div>
+      <div class="num three"
+        style="order:1;"
+      ></div>
+      <div class="num four"
+        style="order:-1;"
+      ></div>
+      <div class="num five"></div>
+    </div>
+
+    <h3>flex-grow</h3>
+    <pre><strong>flex-grow:</strong> [any integer];</pre>
+    <div class="flex-me">
+      <div class="num"
+        style="flex-grow:1;"
+      ></div>
+      <div class="num one"
+        style="flex-grow:1;"
+      ></div>
+      <div class="num two"
+        style="flex-grow:2;"
+      ></div>
+      <div class="num three"></div>
+      <div class="num four"></div>
+      <div class="num five"></div>
+    </div>
+
+    <h3>flex-shrink</h3>
+    <pre><strong>flex-shrink:</strong> [any integer];</pre>
+    <div class="flex-me">
+      <div class="num"
+        style="flex-shrink: 0;"
+      ></div> <!-- will not shrink in size -->
+      <div class="num one"
+        style="flex-shrink: 1;"
+      ></div>
+      <div class="num two"></div>
+      <div class="num three"></div>
+      <div class="num four"
+        style="flex-shrink: 6;"
+      ></div>
+      <div class="num five"></div>
+    </div>
+
+    <h3>flex-basis</h3>
+    <pre><strong>flex-basis:</strong> [any unit] | 0 | auto;</pre>
+    <div class="flex-me">
+      <div class="num"></div>
+      <div class="num one"
+        style="flex-basis: 300px;"
+      ></div>
+      <div class="num two"></div>
+      <div class="num three"
+        style="flex-basis: 0;"
+      ></div>
+      <div class="num four"></div>
+      <div class="num five"></div>
+    </div>
+
+    <h3>align-self</h3>
+    <pre><strong>align-self:</strong> stretch | flex-start | flex-end | center | baseline;</pre>
+    <div class="flex-me">
+      <div class="num"></div>
+      <div class="num one"
+        style="align-self: flex-start;"
+      ></div>
+      <div class="num two"
+        style="align-self: flex-end;"
+      ></div>
+      <div class="num three"
+        style="align-self: flex-center;"
+      ></div>
+      <div class="num four"></div>
+      <div class="num five"></div>
+    </div>
+  </body>
+</html>

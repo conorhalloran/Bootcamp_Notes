@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Article</title>
+
+    <style>
+    .blog {
+      display: flex;
+    }
+    .blog > div {
+      height: 660px;
+      background-color: grey;
+      margin: 10px;
+      flex-grow: 1;
+      border-radius: 10px;
+      width: 50px;
+    }
+
+    .blog > div:first-child {
+      flex-grow: 2;
+      justify-content: start;
+      border-radius: 10px;
+      min-width: 340px;
+      background-color: transparent;
+    }
+
+    #image-column > div {
+      height: 120px;
+      background-color: lightgrey;
+      margin-bottom: 10px;
+      flex-grow: 1;
+      border-radius: 10px;
+    }
+
+    #image-column > div:first-child {
+      height: 400px
+    }
+
+    #icons {
+      display: flex;
+      /*height: 20px;*/
+    }
+    #icons > div {
+      height: 40px;
+      background-color: grey;
+      min-width: 40px;
+      max-width: 40px;
+      justify-content: start;
+      align-items: flex-end;
+      border-radius: 10px;
+    }
+
+    #icons > div:not(:last-child) {
+      margin-right: 10px;
+      border-radius: 10px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .image-content {
+      display: flex;
+      align-items: center;
+      padding: 0px 20px 0px 20px;
+    }
+
+    img {
+      width: 80px;
+      margin-right: 20px;
+    }
+
+    p {
+      overflow-wrap: break-word;
+    }
+
+    </style>
+  </head>
+  <body>
+
+    <main>
+      <h1>Article</h1>
+      <section class="blog">
+
+        <div id='image-column'>
+          <div class="image-content">
+            <div class="">
+            <img src="images/smile.png" alt="smile" style="float: left">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+
+            </div>
+          </div>
+          <div class="image-content">
+            <div class=""><img src="images/smile.png" alt="smile"></div>
+            <div class="">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+            </div>
+          </div>
+          <div class="image-content">
+            <div class=""><img src="images/smile.png" alt="smile"></div>
+            <div class="">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+            </div>
+          </div>
+        </div>
+        <div class="sidebar"></div>
+      </section>
+    </main>
+
+  </body>
+</html>

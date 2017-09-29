@@ -1,0 +1,57 @@
+
+
+/*body {
+  margin:0px;
+  background-color: black;
+}
+.content {
+  height: 2000px;
+  width: 960px;
+  margin: 70px;
+}
+#aboutContent {
+  background-color: #d1d1d1;
+}
+h1 {
+  color: #454444;
+  size: 14px;
+}
+h2 {
+  color: #454444;
+  size: 13px;
+}
+#p-about{
+  color: #454444;
+}
+#aboutportfolio{
+  text-align: center;
+  color: #454444;
+}
+#portfolio-row{
+  text-align: justify;
+  color: #454444;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+#portfolio-img{
+  align: center;
+}
+#totopbtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 20px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: #d6d6d6; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 10px; /* Some padding */
+    border-radius: 5px; /* Rounded corners */
+}
+
+#totopbtn:hover {
+    background-color: #555; /* Add a dark-grey background on hover */
+}*/

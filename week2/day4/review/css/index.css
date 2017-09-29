@@ -1,0 +1,74 @@
+html {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  background-color: whitesmoke;
+}
+
+* {
+  font-family: inherit;
+}
+
+body {
+  /*any property doesn't need a unit if its set to 0*/
+  /*this is margin for top, right, bottom and left*/
+  margin: 0;
+}
+
+nav {
+  background-color: steelblue;
+  color: white;
+  padding: 10px;
+  font-size: 0.9em;
+}
+
+nav a {
+  color: inherit;
+  text-decoration: none;
+
+}
+
+main {
+  margin: 10px;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+section > h2 {
+  font-size: 1em;
+  font-weight: bold;
+}
+section#personal-boards, section#starred-boards {
+
+}
+
+ul.board-list {
+  color: white;
+  list-style: none;
+  padding: 0;
+}
+
+ul.board-list > li {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: mediumpurple;
+  padding: 5px;
+  border-radius: 3px;
+  height: 75px;
+}
+
+ul.board-list > li:not(last-child) {
+  margin-bottom: 10px;
+}
+
+ul.board-list > li:nth-child(even) {
+  background-color: darkseagreen;
+}
+
+a:hover {
+  color: whitesmoke;
+  }
+
+.search-field {
+  display: inline-block;
+}

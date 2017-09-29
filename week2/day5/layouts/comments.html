@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <style>
+    .comment {
+      display: flex;
+      flex-direction: column;
+    }
+    .comment > div {
+      height: 150px;
+      background-color: grey;
+      margin-bottom: 20px;
+    }
+
+    #comment-form {
+      background-color: transparent;
+      display: flex;
+    }
+
+    .comment-avatar {
+      width: 150px;
+      flex-shrink: 0;
+      background-color: teal;
+      margin-right: 20px;
+    }
+
+    .comment-content {
+      flex-grow: 1;
+      background-color: gainsboro;
+    }
+
+    </style>
+  </head>
+  <body>
+
+    <main>
+
+      <section class="comment">
+      <div id='comment-form'>
+        <div class='comment-avatar'></div>
+        <div class='comment-content'></div>
+      </div>
+      <div></div>
+      <div></div>
+      <div></div>
+      </section>
+    </main>
+
+  </body>
+</html>
