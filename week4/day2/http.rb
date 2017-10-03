@@ -18,4 +18,5 @@ IPv6: 0:0:0:0:0:0:0:1 or ::1
 
 DNS: Domain Name System: translate a url into an ip address. Is provided by your ISP. 
 
-TCP: Reliable, Ordered, Error Checked, Connection Based. 
+TCP: Reliable, Ordered, Error Checked, Connection Based. TCP Ports have to be unique. 
+UDP: Unreliable, No Order Checking, Best Effort, Faster than TCP. Used for trasmitting Audio/Video files.
