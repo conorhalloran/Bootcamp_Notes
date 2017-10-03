@@ -17,3 +17,5 @@ IPv4: 127.0.0.1 or 0.0.0.0
 IPv6: 0:0:0:0:0:0:0:1 or ::1
 
 DNS: Domain Name System: translate a url into an ip address. Is provided by your ISP. 
+
+TCP: Reliable, Ordered, Error Checked, Connection Based. 
