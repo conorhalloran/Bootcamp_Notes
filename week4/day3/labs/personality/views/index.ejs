@@ -1,0 +1,39 @@
+<%- include('./partials/header') %>
+<main>
+    <h1>The Three Question Personality Test</h1>
+    <section>
+    <div>
+        <p>Please Select your Response to the Following:</p>
+    </div>
+    <div>
+        <form action="results" method='POST'>
+            <div>
+                <label for="work">You work best: </label>
+                <select name="work">
+                   <option value="deadline">With a Deadline</option>
+                   <option value="withoutDeadline">Without a Deadline</option>
+                </select>
+            </div> 
+            <div>
+                <label for="personality">You consider yourself more: </label>
+                <select name="personality">
+                   <option value="rational">Rational</option>
+                   <option value="compassionate">Compassionate</option>
+                </select>
+            </div> 
+            <div>
+                <label for="statements">You are more interested in:</label>
+                <select name="statements">
+                   <option value="ideas">Ideas</option>
+                   <option value="facts">Facts</option>
+                </select>
+            </div> 
+            <!-- <input type="text" name="car_age" placeholder="2017"> -->
+            <div>
+                <button type="submit" name="button">Submit</button>
+            </div>
+        </form>
+    </div>
+    </section>
+</main>
+<%- include('./partials/footer') %>
