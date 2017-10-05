@@ -1,0 +1,35 @@
+<%- include('./partials/header') %>
+<main>
+    <h1>Welcome to Get your Car Status!</h1>
+    <section>
+    <div>
+        <p>Please enter the age of your vehicle.</p>
+    </div>
+    <div>
+        <form action="/" method='POST'>
+            <div>
+                <label for="year">Vehicle Year: </label>
+                <select name="car_age">
+                    <%# This is how you do for loops in ejs %>
+                    <% for (let i = 2017; i >= 1950; i--) { %>
+                        <option value="<%= i %>"><%= i %></option>
+                    <% } %>
+                </select>
+            </div> 
+            <!-- <input type="text" name="car_age" placeholder="2017"> -->
+            <div>
+                <button type="submit" name="button">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div>
+        <% if (car_age) { %>
+        <h2>Your car is:</h2>
+        <p><%= car_age %></p>
+       <!--  👆 that tag with the = escapes all the html characters inside -->
+
+        <% } %>  
+    </div>
+    </section>
+</main>
+<%- include('./partials/footer') %>
