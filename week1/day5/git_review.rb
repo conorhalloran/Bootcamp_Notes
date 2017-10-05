@@ -9,6 +9,7 @@ Steps to creating git repository:
 3. Create Github repository
 4. git remote add origin <ssh url>
 5. git remote -v #verifies that it works
+5.a git push -u --all
 - Do some Work
 5. git add <file or folder name>
 6. git commit -m
