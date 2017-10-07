@@ -5,6 +5,7 @@ mkdir fotorol
 cd fotorol
 mkdir views
 curl https://www.gitignore.io/api/node%2Clinux%2Crails%2Cmacos%2Cwindows > .gitignore
+touch (app filename).js
 git init
 git add . 
 git commit -m "Create Project";
@@ -21,6 +22,8 @@ git repository: (enter repository)
 keywords: exchange-a-gram, app, express
 author: (name)
 License: MIT
+git commit -m "Setup npm";
+
 
 // 3.) INSTALL PACKAGES ******************
 npm install express
@@ -36,6 +39,8 @@ const Express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const welcome = require('./routes/welcome');
+
 const app = Express();
 
 app.set('view engine', 'ejs');
@@ -45,14 +50,14 @@ app.use(morgan('dev'));
 app.use('/', welcome);
 
 // SETUP PORT: @ end of file.
-const PORT = 4545;
+const PORT = 4500;
 app.listen(
-  PORT,
-  () => console.log(`👍🏻 Server listening on http://localhost:${PORT}`)
+    PORT, 'localhost', () => console.log(`💁 Server listening on http://localhost:${PORT}`)
 );
 
 // 5.) CREATE ROUTER ******************
 mkdir router
+cd router
 touch welcome.js
 const Express =require('express');
 const router = Express.Router(); 
@@ -108,7 +113,7 @@ mkdir images
 mkdir js
 cd css 
 touch (filename).css
-cd ..
+cd ../..
 
 // Create Views Folder with partials folder (inc footer.ejs and header.ejs)
 mkdir views
@@ -162,6 +167,7 @@ kx.schema.createTable('posts', table => {
 
 // insert the following into package.json script section
 "db:migrate": "node db/migration.js",
+npm run db:migrate
 
 // NODE INSPECTOR ******************
 // (in terminal):
@@ -169,7 +175,10 @@ node --inspect;
 // enter database as value
 const kx = require('./db/connection');
                     //  👆 this is your database directory
-// This will now let you play with your database files 
+// This will now let you play with your database files ex:  
+
+kx.select().from('posts').then(console.log)
+kx.insert({content: `Look at my ballin' post`, username: `baller_roller`}).into('posts').toString()
 
 // HTTP REQUESTS:
 //  ===> Log ===> Body Parser ===> Get (page)

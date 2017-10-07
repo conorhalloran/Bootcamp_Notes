@@ -1,0 +1,148 @@
+-made changes to yesterday's To Do List lab 
+
+/////// List of Changes made: 
+
+/-/-/-/-/-/-/-/-/-/-/-/ UPLOAD A PHOTO WITH EACH TASK /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
+
+organized based on Steve's commits on the github project:
+
+-------------------------------------------------------------------------------------------------------
+				Install multer, add file input to form and add middleware to welcome 
+---------------------------------------------------------------------------------------------------------
+
+1. Go into main project folder in terminal
+
+2. In order to access photos that are uploaded and do stuff to them, we need the multer package
+**multer adds a 'file' object property to the 'request' object, similar to body-parser adding a 'body' property
+for our forms
+
+3. Run command 'npm install multer' (check package.json to ensure it is listed under 'dependencies')
+
+4. Go into 'welcome.js' (in 'routes' directory)
+
+5. Require multer & path to welcome.js. Add these to the top of the doc:
+
+const multer = require('multer')
+const path = require('path')
+
+6. Add an argument for the photo to be uploaded to the POST method in 'welcome.js'
+
+This: router.post('/', (request, response) => {}
+
+Becomes this: router.post('/', upload.single('photo'), (request, response) => {}
+								^^^^^^^^^^^^^^^^^^^^
+
+7. Create a path for uploads to go to (we are going to send them to an 'uploads' folder in 'public')
+Add this to the top of 'welcome.js': 
+
+const upload = multer({dest: path.join(__dirname, '..', 'public', 'uploads')});
+
+8. Go into 'index.ejs' and add another form for the photo to be uploaded. BE SURE TO NAME IT PHOTO 
+SO IT MATCHES THE NAME WE PASSED TO UPLOAD.SINGLE IN OUR POST METHOD (IN WELCOME.JS)
+
+9. Add this to the form: 
+
+				<div class="form-group">
+					<input class="form-control" name="photo" type="file"></input>
+				</div>
+
+10. ALSO BE SURE TO CHANGE THINGS TO THE <FORM> ELEMENT
+
+This:    <form action="/" method="POST">
+
+Becomes this:     <form action="/" method="POST" enctype="multipart/form-data">
+												^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+-------------------------------------------------------------------------------------------------------
+							Store photo url in db and display it index
+--------------------------------------------------------------------------------------------------------
+
+11. In 'welcome.js', create a 'filename' variable in the POST method - this is accessed through the file
+object that multer added to the 'request' object
+
+12. Add this under the content variable: 
+
+const {filename} = request.file; 
+
+13. Add a photo_path property to the object being inserted into the DB
+
+.insert({content: content, photo_path: `/uploads/${filename}` })
+							^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+14. In 'index.ejs' add an image tag where each task is displayed, it will contain task.photo_path
+Looks like this: 
+
+<img class="card-img" src="<%= tasks[i].photo_path %>">
+
+Put this right under the div with the class 'card-header' and right above the div with the class 'card-body'
+(that contains the p tag with class 'card-text')
+
+15. MAKE SURE 'PHOTO_PATH' WAS ADDED INTO THE TASKS TABLE (check migration.js)
+Should have this line in the query:
+
+table.string('photo_path')
+
+16. If you want them to be displayed from most recent post to earliest post, add this to the insert
+query in 'welcome.js': 
+
+.orderBy('created_at', 'DESC')
+
+-------------------------------------------------------------------------------------------------------
+			CREATE A SHOW PAGE AND DISPLAY EACH TASK INDIVIDUALLY WHEN CLICKED ON 
+-------------------------------------------------------------------------------------------------------
+
+17. Create a 'tasks' folder in the 'views' folder
+
+18. Move 'index.ejs' to 'tasks'
+
+19. METICULOUSLY GO THROUGH CODE AND CHANGE ANY LINK THAT DIRECTS TO 'INDEX' NOW MUST BE DIRECTED TO
+'TASKS/INDEX' (check welcome.js)
+
+20. Change Link to header and footer from './' to '../' since now the file path must go back out
+of 'tasks' and then into 'partials' to access header and footer
+
+<%- include('../partials/header')%>
+<%- include('../partials/header')%>
+
+21. Add a 'show.ejs' file to 'tasks' (can just duplicate 'index.ejs')
+
+22. Delete the form input from 'show.ejs' and the for loop (because this will only display one specific task)
+
+23. Go to 'welcome.js' and add a new GET method that will have an initial argument of '/:id'
+
+24. The added GET method should look something like this: 
+
+
+router.get('/:id', (request, response) => {
+
+	const {id} = request.params;
+
+	kx
+		.first()
+		.from('tasks')
+		.where({id})
+		.then(tasks => {
+			response.render('tasks/show', {tasks}) // content is actually unnecessary 
+		})
+	
+});
+
+
+25. Add an anchor tag to the card-img's in 'index.ejs'. It should have these attributes: 
+
+<a href="/tasks/<%= task.id %>"> // 
+
+26. HEY ON. STOP RIGHT THERE. IN ORDER FOR THIS TO ALL WORK, MUST MAKE THIS A 'RESTFUL' APP
+
+27. In 'routes', duplicate 'welcome.js' and rename it 'tasks.js'
+
+28. In 'app.js' you must require 'tasks': 
+
+const tasks = require('./routes/tasks')
+
+29. Next, in 'app.js' you must add:
+
+app.use('/tasks', tasks);
+
+*********PUT THIS ABOVE THE APP.USE FOR WELCOME

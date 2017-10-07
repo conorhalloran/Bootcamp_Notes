@@ -3,7 +3,7 @@ Create a new project by running the following:
 // 1.) SETUP GIT ************************
 mkdir fotorol
 cd fotorol
-mkdir views
+touch (app filename).js
 curl https://www.gitignore.io/api/node%2Clinux%2Crails%2Cmacos%2Cwindows > .gitignore
 git init
 git add . 
@@ -22,7 +22,20 @@ keywords: exchange-a-gram, app, express
 author: (name)
 License: MIT
 
-// 3.) INSTALL PACKAGES ******************
+
+// 3.) SETUP NODEMON FOR SERVER AUTO RELOAD ******************
+npm install --save-dev nodemon
+go into package.json 
+add to scripts: 
+"scripts": {
+    "start": "nodemon",
+    "debug": "nodemon --inspect"
+},
+To load app: npm run start
+to load debug: npm run debug
+
+
+// 4.) INSTALL PACKAGES ******************
 npm install express
 npm link chalk
 npm link faker
@@ -31,7 +44,7 @@ npm install ejs
 npm install body-parser
 git commit -m "Setup Project"
 
-// 4.) IN APP.JS FILE ******************
+// 5.) IN APP.JS FILE ******************
 const Express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -40,33 +53,77 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(morgan('dev'));
 
-// 5.) SETUP NODEMON FOR SERVER AUTO RELOAD ******************
-npm install --save-dev nodemon
-go into package.json 
-add: 
-"scripts": {
-    "start": "nodemon",
-    "debug": "nodemon --inspect"
-},
-To load app: npm run start
-to load debug: npm run debug
-
-// HTTP REQUESTS:
-//  ===> Log ===> Body Parser ===> Get (page)
-//                            ===> Get (profile)
-
-// 5.) SETUP LOGGING MIDDLEWARE ******************
-// in app.js, before app.get
-app.use ( (request, response, next) => {
+app.use((request, response, next) => {
     const {method, path} = request;
-    // 👆 assigns the property 'method' from 'request' to the variable 'method' from  
-    // const method = request.method;
-    // const path = request.path;
-    // this is called destructuring
-    // debugger
-    const message = `${method} ${path} at ${new Date()}`;
+    const message = `${method} ${path} at ${new Date()}`
     console.log(message);
-    
-    // next is a function given to middleware callbacks as an argument. It is always the thrid argument. When called, Express will move on the next middleware in line.
     next();
+})
+
+app.get('/', (req, res) => {
+    res.send("Hello World");
 });
+
+const PORT = 4500;
+app.listen(
+    PORT, 'localhost', () => console.log(`💁 Server listening on http://localhost:${PORT}`)
+);
+
+// SETTING UP ADVANCED FEATURES: *********************************
+
+// 6.) SETTING UP PAGES
+
+mkdir views
+cd views
+touch index.ejs
+mkdir partials
+cd partials
+touch footer.ejs
+touch headers.ejs
+
+// 7.) UPDATE PAGES
+
+// INDEX.EJS
+(<%- include('./partials/header') %>)
+<main>
+    <section>
+        <h1>Hello World</h1>
+    </section>
+</main>
+(<%- include('./partials/footer') %>)
+
+// FOOTER.EJS
+// HEADER.EJS
+
+// 8.) UPDATE APP PAGE: *********************************
+const Express = require('express');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const app = Express();
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(morgan('dev'));
+
+app.get('/', (request, response) => {
+    console.log(request.body);
+    response.render('index', {content: null});
+});
+
+app.post('/', (request, response) => {
+    console.log(request.body);
+    const {body} = request;
+    response.render('index', body);
+})
+
+app.get('/response', (request, response) => {
+    response.render('response')
+})
+
+app.get('/list', (request, response) => {
+    response.render('list');
+});
+
+const PORT = 4500;
+app.listen(
+    PORT, 'localhost', () => console.log(`💁 Server listening on http://localhost:${PORT}`)
+);
