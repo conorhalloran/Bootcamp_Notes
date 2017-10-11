@@ -1,0 +1,10 @@
+<%- include('./partials/header') %>
+  <!--
+    - anything between the `<%= %>` will be read as javascript.
+    - That means `age` is a javascript variable.
+    - That means that whenever the server renders this view, result.ejs, it must
+      pass a varaible called `age` to the view.
+    e.g. res.render('result',{age: 'Old'}); // <- this appears on index.js
+  -->
+  <h1>Your personality is: <%= result %>!</h1>
+<%- include('./partials/footer') %>

@@ -1,0 +1,26 @@
+{
+  "name": "personality",
+  "version": "0.0.0",
+  "description": "Personality Test",
+  "main": "personality.js",
+  "scripts": {
+    "start": "nodemon",
+    "debug": "nodemon --inspect"
+  },
+  "keywords": [
+    "personality",
+    "test",
+    "survey"
+  ],
+  "author": "Conor Halloran",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.1",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
