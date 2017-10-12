@@ -1,0 +1,1 @@
+ORM - Object Relational Mapper: We map tables and rows to Objects in our code. 
