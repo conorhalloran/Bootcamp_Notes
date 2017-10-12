@@ -19,6 +19,7 @@ rails c
 Be sure to run db:create prior to any migrate.
 rails generate model question title:string body:text
 # will create a title column of type string, body colum of type text
+rails generate model product title:string description:text price:integer 
 
 Migrate: Management of incremental reversible changes to a relational database.
 rails db:migrate
