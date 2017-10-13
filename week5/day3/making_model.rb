@@ -1,4 +1,4 @@
-1.) Gemfile - 
+1.) Ensure you have the Gems in your Gemfile 
 Global:
 gem 'faker', github: 'stympy/faker'
 gem 'cowsay', '~> 0.3.0'
@@ -8,7 +8,7 @@ gem 'pry' #pry gem itself
 gem 'pry-rails' #a gem that integrates pry with rails seemlessly
 gem 'hirb'
 
-2.) rails db:create
+2.) Create your database: rails db:create
 
 Create Your First Model:
 3.) rails generate model product title:string description:text price:integer 
