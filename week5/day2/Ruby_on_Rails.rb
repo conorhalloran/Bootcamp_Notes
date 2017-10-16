@@ -35,6 +35,7 @@ Rails is just another Gem. gem install rails --no-ri --no-rdoc
 
 # Create a Project: Awesome Answers.
 rails new awesome_answers #creates a new rails project in a folder. 
+rails new blog
     - Create in root folder as it will create a project folder with the requested name.
 rails db:create
 rails g controller Posts
