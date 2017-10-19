@@ -19,7 +19,7 @@ class Dogs
       puts 'I have too many bones'
     else
     # @bones.push
-    puts "I have a bone!"
+    puts bone
     @bones << bone
     end
   end

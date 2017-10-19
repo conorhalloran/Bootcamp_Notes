@@ -30,4 +30,16 @@ class RectangleTest < MiniTest::Test
         assert_equal(false, is_square)
     end
 
+    def test_perimeter
+        s = Rectangle.new(3, 2)
+        perimeter = s.perimeter
+        assert_equal(10, perimeter)
+    end
+
+    # def test_perimeter_1
+    #     s = Rectangle.new(3, 2)
+    #     perimeter = s.perimeter
+    #     assert_equal(15, perimeter)
+    # end
+
 end
