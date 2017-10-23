@@ -50,7 +50,8 @@ Rails runs tests through a test database.
 
 1.) rails new fundsy -T
 2.) add gem 'rspec-rails' to group :development, :test do
-3.) rails g respec:install
+3.) rails g rspec:install
+    # rails g rspec model product
 4.) rails db:create
 5.) rails g model campaign title:text description:text goal:integer end_date:datetime 
 6.) fundsy/rspec/model/campaign_spec.rb
@@ -98,4 +99,49 @@ end
 10.) Add unique validation
 class Campaign < ApplicationRecord
     validates :title, presence: true, uniqueness: true
+end
+
+class Student
+    def initialize (first_name, last_name, score)
+    @first_name, @last_name, @score = first_name, last_name, score
+    end
+
+    def full_name
+        "#{@first_name} #{@last_name}"
+    end
+    def grade
+        if @score >= 90
+            "A"
+        elsif @score >= 75
+            "B"
+        elsif @score >= 60
+            "C"
+        elsif @score >= 50
+            "D" 
+        else 
+            "F"
+        end
+    end
+end
+
+require 'minitest/autorun'
+require './student.rb'
+
+class StudentTest < MiniTest::Test
+
+    def test_full_name
+        s = Student.new('billy', 'bob', 90)
+        assert_equal "billy bob", s.full_name
+    end
+
+    def test_grade
+        s = Student.new('billy', 'bob', 90)
+        assert_equal "A", s.grade
+    end
+
+    def test_grade2
+        s2 = Student.new('sandra', 'bob', 55)
+        assert_equal "A", s2.grade
+    end
+
 end
