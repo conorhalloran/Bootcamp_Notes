@@ -259,7 +259,48 @@
         #this will replace everything in your routes.rb file.
         # http://guides.rubyonrails.org/routing.html
         resources :posts 
+
+20.) Setup Nav Bar and Alerts in application.html.erb
+<body>
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+          <a class="navbar-brand" href="/">Blog</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
         
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <%= link_to  "New Post", new_post_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to  "All Posts", posts_path, class: "nav-link" %>
+              </li>
+            </ul>
+          </div>
+        </nav>
+    <main class="container-fluid">
+      <% if flash[:notice].present? %>
+        <div class="alert alert-success alert-dismissable fade-show" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <%= flash[:notice] %>
+        </div>
+        <% end %>
+      
+        <% if flash[:alert].present? %>
+          <div class="alert alert-danger alert-dismissable fade-show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <%= flash[:alert] %>
+          </div>
+          <% end %>
+          <%^ # %>
 #################### BASIC DONE ####################
 #------------------------------------------------
 #################### ONE TO MANY ####################
@@ -295,3 +336,77 @@
 3.) Create a Category controller:
 rails g controller reviews new --no-assets --no-helper
 4.) Add to Category Controller: 
+
+
+#################### ONE TO MANY DONE ####################
+#------------------------------------------------
+####################  USER AUTHENTICATION ####################
+
+1.) gem 'devise'
+    1.1) ensure 'bcrypt', '~> 3.1.7' is uncommented in your Gem file.
+    1.2) bundle install
+    1.3) rails generate devise:install
+2.) Setup App:
+    2.1.) in config/environments/development.rb:
+        config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+        In production, :host should be set to the actual host of your application.
+
+    2.2 Ensure in your config/routes.rb, root is set: root to: "home#index"
+
+  2.3.) Ensure you have flash messages in app/views/layouts/application.html.erb.
+3.) rails generate devise User
+        3.1) in migration file:
+            t.string :first_name
+            t.string :last_name
+            t.string :email,              null: false, default: ""
+            t.string :encrypted_password, null: false, default: ""
+            t.boolean :admin, default: false
+        3.2) rails db:migrate
+5.) Generate Users View Folder: rails generate devise:views users
+6.) config/initializers/device.rb, uncomment: config.scoped_views = false. Change to true. 
+7.) Configuration User Controller:
+    7.1) rails generate devise:controllers users
+    rails g controller users --no-assets --no-helper --no-routes
+    7.2) routes.rb: devise_for :users, controllers: { sessions: 'users/sessions' }
+                or
+    devise_for :users, path: 'users', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
+    7.4)
+    7.3) users_controller.rb: 
+    class UsersController < ApplicationController
+        def new
+            @user = User.new
+        end
+    
+        def create
+            @user = User.new user_params
+            if @user.save
+                session[:user_id] = @user.id
+                #The `flash` is a global object used to store information that will be available for the next request only.
+                flash[:notice] = 'Thank you for signing up'
+                redirect_to root_path #notice: 'Thank you for signing up!'
+            else
+                render :new
+            end
+        end
+        private
+        def user_params
+            params.require(:user).permit(
+                :first_name, :last_name, :email, :password, :password_confirmation,
+                {avatars: []})
+        end
+    end
+8.) In user model:  
+
+devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+  
+  def full_name
+      "#{first_name} #{last_name}"
+  end
+9.) Adjust header to account for new paths:
+
+
+
+#################### USER AUTHENTICATION DONE ####################
+#------------------------------------------------
+####################  USER AUTHORIZATION START ####################
