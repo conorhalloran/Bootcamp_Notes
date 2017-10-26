@@ -261,3 +261,34 @@ document.addEventListener('keydown', event => {
         window.location.href = 'http:hackertyper.net'
     }
 })
+
+// ************** Event Propogation **************
+DOM event objects move in a predefined way throughout the DOM.They begin at the eldest ancestor (namely #document) and trickly down its children until it reaches the 'target' node.This is the CAPTURING phase.
+
+    // Once the event reaches the 'target' node, it is in a transitionary phase, refered to as 'AT_TARGET'. Afterwards, the event bubbles up from parent to parent recursively until it reaches the eldest ancestor again. This is the BUBBLING phase and the default triggering order for event listeners. 
+
+    document.querySelectorAll('.doggo, .roster, .team, .teams, body').forEach(
+    node => {
+        node.addEventListener('click', event => {
+            const { currentTarget } = event;
+            const { id, className, tagName } = currentTarget
+            console.log(`#${tagName} - ${id} - ${className} was triggered`)
+
+        }, true) // adding true will change the order in which the nodes are triggered. 
+
+    }
+    )
+
+// Can consoildate to:
+function eventPropogation(node) {
+    const { currentTarget, eventPhase } = event;
+    const { id, className, tagName } = currentTarget
+    console.log(`#${tagName} - ${id} - ${className} was triggered. PHASE: ${eventPhase}`)
+}
+
+document.querySelectorAll('.doggo, .roster, .team, .teams, body').forEach(
+    node => {
+        node.addEventListener('click', eventPropogation, true)
+        node.addEventListener('click', eventPropogation)
+    }
+)

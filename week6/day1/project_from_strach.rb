@@ -410,3 +410,82 @@ devise :database_authenticatable, :registerable,
 #################### USER AUTHENTICATION DONE ####################
 #------------------------------------------------
 ####################  USER AUTHORIZATION START ####################
+1.) gem 'cancancan', '~> 1.10' ... bundle
+2.) rails g cancan:ability
+3.) In app/model/ability.rb:
+    can :manage, Post do |post|
+        post.user == user 
+    end
+4.) Update Show Page:
+    <% if user_signed_in? && can?(:manage, @post) %>
+        <%= link_to "Edit", edit_post_path(@post) %> |
+        <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
+    <% end %>
+    <% # %>
+5.) Implement Posts belonging to Users
+    5.1) Update posts_controller.rb: 
+        before_action :authenticate_user!, except: [:show, :index]
+        def create - @post.user = current_user
+    5.2) Update post.rb: belongs_to :user, optional: true
+    5.3) rails g migration add_user_to_post user:references
+    5.4) add_reference :posts, :user, foreign_key: true, index: true
+    5.5) rails db:migrate. 
+
+6.) Setup Admin User Access:
+7.) Setup Admin Dashboard: (active admin gem)
+    7.1.) Create an Admin Controller:
+        rails g controller Admin::Application --no-assets --no-helper --no-routes
+    7.2.)Create an Admin Dashboard
+        rails g controller Admin::Dashboard --no-assets --no-helper --no-routes
+        class Admin::DashboardController < Admin::ApplicationController
+            def index
+                @stats = {
+                    post_count: Post.count,
+                    user_count: User.count,
+                    category_count: Category.counnt
+                }
+                @user = User.all
+                @category = Category.all
+            end
+            
+        end
+    7.3.) routes.rb:
+    namespace :admin do
+        resources :dashboard, only: [:index]
+    end
+    7.4.) Create index.html.erb in views/admin/dashboard
+        <h1>Hey Admin</h1>
+
+    7.5.) Admin/application_controller.rb
+    before_action :authenticate_user!
+    before_action :authorize_admin!
+
+    private
+    def authorize_admin!
+        redirect_to root_path, alert: 'Access Denied! 💩' unless current_user.is_admin?
+    end
+8.) Seed Database with admin super user:
+    User.destroy_all
+
+    PASSWORD = 'password'
+
+    super_user = User.create(
+        first_name: 'Jon',
+        last_name: 'Snow',
+        email: 'js@winterfell.gov',
+        password: PASSWORD,
+        admin: true
+    )
+
+    10.times.each do
+        first_name = Faker::Name.first_name
+        last_name = Faker::Name.last_name
+            User.create(
+                first_name: first_name,
+                last_name: last_name,
+                email: "#{first_name.downcase}.#{last_name.downcase}@example.com",
+                password: PASSWORD
+            )
+    end
+
+    users = User.all
