@@ -46,7 +46,8 @@
     5.1) rails generate model post title:string body:text view_count:integer like_count:integer
     5.2) rails g controller posts --no-assets --no-helper --no-routes
     5.3) Create an index.html.erb & show.html.erb pages in app/views/post
-    5.4) Test if Model worked:
+    5.4) rails db:migrate
+    5.5) Test if Model worked:
         rails c
         p = Post.new
         p.title = "1st Post"
@@ -304,40 +305,124 @@
 #################### BASIC DONE ####################
 #------------------------------------------------
 #################### ONE TO MANY ####################
-1.) Create a Model: rails g model category name:text
+1.) Create a Model: rails g model comment body:text user:references post: :references
 2.) Create new Column to Posts:
-    2.1) rails g migration add_category_to_posts
-    2.2) class AddCategoryToPosts < ActiveRecord::Migration[5.1]
+    2.1) rails g migration add_comment_to_posts
+    rails g migration add_review_to_ideas
+    2.2) class AddCommentToPosts < ActiveRecord::Migration[5.1]
             def change
-                add_reference :posts, :category, foreign_key: true, index: true
+                t.text :body
+                t.references :user, foreign_key: true # prepare for user authentication
+                t.references :post, foreign_key: true
+
+                t.timestamps
             end
         end
     2.3) rails db:migrate
-    2.4) post.rb: belongs_to :category 
-    2.5) category.rb:
-        class Category < ApplicationRecord
-        has_many :posts, dependent: :nullify
-        
-        before_save :titleize_name
+    2.4) post.rb: has_many :comments, dependent: :destroy
+ 
+    2.5) comment.rb:
+        class Comment < ApplicationRecord
+        belongs_to :user # add after user authentication
+        belongs_to :post
 
-        validates(:name, {
-            presence: {message: 'must be provided'},
-            uniqueness: true
-        })
-        end
+        validates :body, presence: :true
+
     2.6) setup routes: resources :categories, only: [:create]
-    2.7) add to _form.html.erb: 
-    <%= form_for [@category, @post] do |form| %>
-    <div>
-            <%= form.label :category_id %>
-            <%= form.select :category_id, @categories.map { |category| [category.name, category.id]} %>
-        </div>
-        <% # %>
-3.) Create a Category controller:
-rails g controller reviews new --no-assets --no-helper
-4.) Add to Category Controller: 
+    2.7) add to show.html.erb: 
+    <div class="row">
+    <div class="col-xs-10 col-sm-10 col-md-9">
+        <h3>Leave a Comment</h3>
+            <%= form_for [@post, @comment] do |form| %>
+                <div class="form-group row">
+                    <div class="col-sm-12"><%= form.text_area :body, class: "form-control", placeholder: "Enter your Comment here." %></div>
+                </div>
+                <div class="row">
+                    <div class="col"><%= form.submit class: "btn btn-outline-success"%></div>
+                </div>
+            <% end %>
+            <hr>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-9 comment-list">
+        <% @comments.each do |comment| %>
+            <div class="comment-list-item">
+                <div class="row">
+                    <div class="col-sm-4 col-md-3 avatar">
+                        <%= image_tag 'laughing-buddah.jpg', style: 'width: 9rem; border-radius: 50px;' %>
+                    </div>
+                    <div class="col-sm-8 col-md-9">
+                        <p><%= comment.body %></p>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-6" style="text-align: left;">
+                        <p>By: <%= comment.user&.full_name %></p>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <p>Created: <%= time_ago_in_words(comment.created_at) %> ago</p>   
+                    </div>
+                    <div class="col">
+                        <% if user_signed_in? && can?(:destroy, comment) %>
+                        <%= link_to 'Delete', comment_path(comment), data: {confirm: 'Are you sure?'}, method: :delete, class: "btn btn-outline-danger" %>
+                        <% end %>
+                        <hr>
+                    </div>
+                 </div>
+                
+            </div>
+        <% end %>
+    </div>
+</div> 
+3.) Create a Comments controller:
+rails g controller comments new --no-assets --no-helper
+4.) Add to Comments Controller: 
+    before_action :authenticate_user!  #add after user authentication
+    before_action :find_post, only: [:create]
+    before_action :find_comment, only: [:destroy]
+    before_action :authorize_user!, except: [:create] #add after user authentication
 
+    def create 
+        @comment = @post.comments.build(comment_params)
+        @comment = Comment.new comment_params
+        @comment.user = current_user
+        @comment.post = @post
+        if @comment.save
+            redirect_to post_path(@post)
+        end
+    end
 
+    def destroy
+        @post = @comment.post
+        @comment.destroy
+        redirect_to post_path(@comment.post)
+    end
+
+    private
+    def find_post
+        @post = Post.find(params[:post_id])
+    end
+
+    def find_comment
+        @comment = Comment.find(params[:id])
+    end
+    def comment_params
+        params.require(:comment).permit( :body, :post_id, :user_id)
+    end
+
+    def authorize_user!
+        unless can?(:manage, @comment)
+        flash[:alert] = "Access Denied!"
+        redirect_to root_path
+        end
+    end
+5.) Update Posts Controller:
+def show
+    @post = Post.find params[:id]
+    @now = Time.now
+    @duration = @now - @post.created_at
+    @comments = @post.comments.order(created_at: :desc)
+    @comment = Comment.new 
+end
 #################### ONE TO MANY DONE ####################
 #------------------------------------------------
 ####################  USER AUTHENTICATION ####################
@@ -366,12 +451,11 @@ rails g controller reviews new --no-assets --no-helper
 6.) config/initializers/device.rb, uncomment: config.scoped_views = false. Change to true. 
 7.) Configuration User Controller:
     7.1) rails generate devise:controllers users
-    rails g controller users --no-assets --no-helper --no-routes
-    7.2) routes.rb: devise_for :users, controllers: { sessions: 'users/sessions' }
+    7.2) rails g controller users --no-assets --no-helper --no-routes
+    7.3) routes.rb: devise_for :users, controllers: { sessions: 'users/sessions' }
                 or
     devise_for :users, path: 'users', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
-    7.4)
-    7.3) users_controller.rb: 
+    7.4) users_controller.rb: 
     class UsersController < ApplicationController
         def new
             @user = User.new
@@ -395,17 +479,68 @@ rails g controller reviews new --no-assets --no-helper
                 {avatars: []})
         end
     end
-8.) In user model:  
+8.) In user.rb model:  
+    has_many :posts, dependent: :nullify
+    has_many :comments, dependent: :nullify
 
-devise :database_authenticatable, :registerable,
+    devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   
-  def full_name
-      "#{first_name} #{last_name}"
-  end
-9.) Adjust header to account for new paths:
+  
+    def full_name
+        "#{first_name} #{last_name}"
+    end
 
+9.) In ApplicationController:
+    protect_from_forgery with: :exception
 
+    before_action :configure_permitted_parameters, if: :devise_controller?
+    
+    protected
+    
+    def configure_permitted_parameters
+        devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :password,
+        :password_confirmation, :remember_me, :avatar, :avatar_cache, :remove_avatar) }
+        devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:first_name, :last_name, :email, :password,
+        :password_confirmation, :current_password, :avatar, :avatar_cache, :remove_avatar) }
+    end
+
+10.) in PostsController.rb:
+    before_action :authenticate_user!, except: [:index]
+    before_action :authorize_user!, except: [:index, :show, :new, :create]
+11.) Adjust header to account for new paths:
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item"><%= link_to  "All Posts", posts_path, class: "nav-link" %></li>
+        
+        #<!-- USER SIGNED IN? -->
+        <% if user_signed_in? %>
+        <li class="nav-item">
+            <%= link_to  "New Post", new_post_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+            <a href="<%= edit_user_registration_path %>" class="nav-link">Hello <strong><%= current_user.full_name %></strong></a>
+        </li>
+        <li class="nav-item">
+
+        #<!-- ADMIN USER -->
+        <% if current_user.admin? %>
+            <%= link_to  "Dashboard", admin_dashboard_index_path, class: "nav-link" %> 
+        </li>
+        <% end %>
+        <li class="nav-item">
+            <%= link_to  "Logout", destroy_user_session_path, method: :delete, data: {confirm: "Really Want to Logout?"}, class: "nav-link" %>
+        </li>
+        <% else %>
+            <li class="nav-item"><%= link_to  "Sign Up", new_user_registration_path, class: "nav-link" %>
+            <li class="nav-item"><%= link_to  "Login", user_session_path, class: "nav-link" %>
+        <% end %>
+    </ul>
+    </div>
+    <% # %>
 
 #################### USER AUTHENTICATION DONE ####################
 #------------------------------------------------
@@ -413,8 +548,20 @@ devise :database_authenticatable, :registerable,
 1.) gem 'cancancan', '~> 1.10' ... bundle
 2.) rails g cancan:ability
 3.) In app/model/ability.rb:
+
+    user ||= User.new # guest user (not logged in)
+    if user.admin?
+      can :manage, :all
+      else
+        can :read, :all
+    end
+
     can :manage, Post do |post|
         post.user == user 
+    end
+
+    can :manage, Comment do |comment|
+    comment.user == user 
     end
 4.) Update Show Page:
     <% if user_signed_in? && can?(:manage, @post) %>
