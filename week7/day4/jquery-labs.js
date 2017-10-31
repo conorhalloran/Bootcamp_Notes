@@ -110,7 +110,32 @@ $('form').submit(function (event) {
 });
 
 // When the form is submitted, clear the text in the input field.
-$('#form-1' > input:first-child)
+function clearForm() {
+    $('#form-1 > input[type=text]').val("");
+}
+
+$('#form-1').on('submit', function () {
+    clearForm();
+});
+
 // As you type in the text input, change the Form Message to be the same as what you type.
+$('#form-1 > input:first-child').on("input", event => {
+    $('#form-message').html($(event.currentTarget).val())
+})
 // As you type in the text input, change the Form Message to be the REVERSE of what you type.
+$('#form-1').on('input', event => {
+    let str = $(event.currentTarget.firstElementChild).val()
+    $('#form-message').html(str.split("").reverse().join(""))
+})
 // Set a delegated click handler on the orange container so that red shapes are removed when you click them.
+$("#orange-container").on("click", ".red.shape", event => {
+    $(event.currentTarget).remove()
+})
+
+
+// 2 
+
+
+
+// 3 
+
