@@ -74,7 +74,7 @@ app.listen(
 
 
 // 5.) SETUP NODEMON FOR SERVER AUTO RELOAD ******************
-npm install --save-dev nodemon
+npm install --save -dev nodemon
 go into package.json 
 add: 
 "scripts": {
