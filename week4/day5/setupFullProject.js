@@ -92,7 +92,7 @@ mkdir images
 mkdir js
 cd css 
 touch (filename).css
-cd ../..
+// cd  ../.. 
 
 // 7.) LINK BOOTSTRAP TO PROJECT - STATIC ASSET MIDDLEWARE:
 
