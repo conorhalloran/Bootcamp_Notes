@@ -194,7 +194,7 @@ constructor (props) {
                     const { jwt } = data;
                     localStorage.setItem('jwt', jwt);
                     onSignIn();
-                    this.props.history.push;
+                    this.props.history.push('/');
                 }
 12.) Redirect Users that are not signed in. 
  create component: AuthRoute.js

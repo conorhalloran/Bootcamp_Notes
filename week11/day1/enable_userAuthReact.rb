@@ -79,7 +79,7 @@ def current_user
     # headers: { 'authorization': 'API_KEY <token>'}
 
     #Ruby array destructuring:
-    token_type, token = tokenrequest.headers['AUTHORIZATION']&.split(" ") || []
+    token_type, token = request.headers['AUTHORIZATION']&.split(" ") || []
 end
 
 def authenticate_api_user
@@ -112,3 +112,4 @@ end
     end
     7.3) Test:
     Headers: key: Authorization, Value = jwt token
+8.1) yarn add jwt-decode
