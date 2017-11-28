@@ -37,3 +37,4 @@
             end
         end
 4.) Product.all.each {|p| p.publish!}
+4.)

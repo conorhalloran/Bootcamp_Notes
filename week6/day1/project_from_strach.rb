@@ -321,6 +321,11 @@
                 t.timestamps
             end
         end
+
+        or 
+        def change
+            add_reference :questions, :user, foreign_key: true, index: true
+        end
     2.3) rails db:migrate
     2.4) post.rb: has_many :comments, dependent: :destroy
  
