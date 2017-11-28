@@ -40,10 +40,10 @@ Put images into app/assets/images
 10.) Deploying to Heroku:
 https://dashboard.heroku.com/apps
 
-Install rails_12factor:
-gem 'rails_12factor', group: :production
-
-git add -A
+  10.1) Install rails_12factor:
+    gem 'rails_12factor', group: :production
+    bundle 
+  10.2) Push all to Git: git add -A, git commit ... git push origin
 heroku create my-app-here
 heroku git:remote -a my-app-here
 git push origin

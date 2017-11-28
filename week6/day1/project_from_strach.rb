@@ -40,8 +40,11 @@
         <%= image_tag 'laughing-buddah.jpg', style: 'width: 100%; border-radius: 20px;' %>
         <% # %>
     4.3) Setup root_path in routes.rb
-        root "home#index"
 
+
+5.a) rails g scaffold event type:text name:string location:string description:text user:references leader:references date:date start_time:time end_time:time 
+5.b) rails g scaffold team name:string user:references member:references event:references
+5.c) rails g scaffold task name:string user:references event:references completed:boolean due_by:date assigned_by:string 
 5.) Create a Post model with a title and body followed by an accompanying PostsController:
     5.1) rails generate model post title:string body:text view_count:integer like_count:integer
     5.2) rails g controller posts --no-assets --no-helper --no-routes
@@ -317,6 +320,11 @@
 
                 t.timestamps
             end
+        end
+
+        or 
+        def change
+            add_reference :questions, :user, foreign_key: true, index: true
         end
     2.3) rails db:migrate
     2.4) post.rb: has_many :comments, dependent: :destroy
