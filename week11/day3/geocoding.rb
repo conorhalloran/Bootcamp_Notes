@@ -131,6 +131,18 @@ User.where(latitude: nil).each do |user|
     user.update(latitude: lat + rand / 2000, longitude: long + rand / 2000)
 end
 if previously set: User.all.update(latitude: lat + rand / 100, longitude: long + rand / 100)
+
+    ###
+rand(-180..180) = long
+rand(-90..90) = lat
+Trip.where(latitude: nil).each do |trip|
+    lat = rand(-70..70)
+    long = rand(-180..180)
+    trip.update(latitude: lat, longitude: long)
+end
+
+
+    ###
 24.) update NearbyUsersController:
 if session[:latitude] && session[:longitude]
     @users = User.near([session[:latitude], session[:longitude]], 20, units: :km)

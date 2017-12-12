@@ -309,6 +309,7 @@
 #------------------------------------------------
 #################### ONE TO MANY ####################
 1.) Create a Model: rails g model comment body:text user:references post: :references
+1.) Create a Model: rails g scaffold day title:string description:text date:string start_location:string start_latitude:float start_longitude:float end_location:string end_latitude:float end_longitude:float user:references trip:references
 2.) Create new Column to Posts:
     2.1) rails g migration add_comment_to_posts
     rails g migration add_review_to_ideas
